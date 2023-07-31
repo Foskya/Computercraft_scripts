@@ -1,4 +1,4 @@
-The turtle with the code "auto_sorter_first" must be placed directly above the turtle with the code "auto_sorter_second"
+The turtle with the code "auto_sorter_first.lua" must be placed directly above the turtle with the code "auto_sorter_second.lua"
 each turtle must have, in three of the four horizontally adiacent blocks, a chest item (or similar, as long as it is a container, the more space it has the better),
 and ONLY one vanilla barrel in the remaining horizontal adiacent block. (the turtle will use this barrel to orient itself).
 
