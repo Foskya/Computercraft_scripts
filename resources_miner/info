@@ -1,0 +1,10 @@
+In both programs the turtle dig a 1x1 tunnel (so no mobs can spawn later) and checks, for every block mined,
+if there is a resource in all the 6 block facing the turtle; if it finds one, then it will mine it and look it there is a vein of said resource.
+Once the turtle has reached the prefixed distance, it will mine 8 block laterally and then come back (while still looking for resources)
+
+"strip_mine.lua" mines horizontally; if you are looking for a certain ore (at a certain height) it is generally better to use this, however be wary of unloaded chunks.
+If the turtle ends up in a chunk that is not loaded, it will stops in its track (even if the chunk get loaded after).
+If you are playing with the mod "Peripherals Advanced" you can simply put a chunk loader on the turtle and let it run for how long (and how far) you wish.
+
+On the other hand "strip_mine_vertical.lua", as the name suggests, mines vertically. 
+This is useful if you are looking for a varied amount of resources or you do not want to risk loosing your turtle in an unloaded area  
