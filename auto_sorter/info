@@ -1,17 +1,17 @@
 The turtle with the code "auto_sorter_first.lua" must be placed directly above the turtle with the code "auto_sorter_second.lua"
 each turtle must have, in three of the four horizontally adiacent blocks, a chest item (or similar, as long as it is a container, the more space it has the better),
-and ONLY one vanilla barrel in the remaining horizontal adiacent block. (the turtle will use this barrel to orient itself).
+and a different container in the remaining horizontal adiacent block. (the turtle will use this chest to orient itself).
 
 The first turtle sorts:
-  1. BARREL/FRONT  Edible Items
-  2. LEFT          Ores and gems
-  3. BEHIND        Equipments (armor, weapon or tool)
-  4. RIGHT         Fuel Items (this includes wood)
+  1. FRONT    nothing (it is where the ender chest is placed)
+  2. LEFT     Ores and gems
+  3. BEHIND   Equipments and Books (anithing with durability or enchantment)
+  4. RIGHT    Fuel Items (i.e. mostly wood)
 
   Any item that does not fall in one of the four categories above, will be given to the second turtle (below)
 
   The second turtle sorts:
-  1. BARREL/FRONT  Items with stacks number ≠ from 64
-  2. LEFT          nonvanilla items
-  3. BEHIND        vanilla items
-  4. RIGHT         debris (cobblestone, diorite, dirt etc)
+  1. FRONT    vanilla items
+  2. LEFT     nonvanilla items
+  3. BEHIND   Items with stacks number ≠ from 64     
+  4. RIGHT    debris (cobblestone, diorite, dirt etc)
