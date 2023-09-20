@@ -21,9 +21,9 @@ function object_is_in_array(element_name, array)
     end
 end
 
-function face_barrel()
+function face_first_chest()
     local _block_is_found , block_data_table = turtle.inspect()
-    while block_data_table.name ~= "minecraft:barrel" do
+    while block_data_table.name ~= "ironchest:obsidian_chest" do
         turtle.turnLeft()
         _block_is_found , block_data_table = turtle.inspect()
     end
@@ -33,7 +33,9 @@ end
 -- FILTERING --
 function item_has_low_max_stack(slot)
     if turtle.getItemCount(slot) + turtle.getItemSpace(slot) < 64 then
-        face_barrel()
+        face_first_chest()
+        turtle.turnLeft()
+        turtle.turnLeft()
         turtle.drop()
         return true
     end
@@ -41,7 +43,7 @@ end
 
 function item_is_debris(item_data_table_name)
     if object_is_in_array(item_data_table_name, debris_block_array) then
-        face_barrel()
+        face_first_chest()
         turtle.turnRight()
         turtle.drop()
         return true
@@ -51,14 +53,12 @@ end
 function item_is_from_mod(block_data_table_name)
     mod_name = string.match(block_data_table_name, "([^:]+):") -- this filters whatever is before the ":"( minecraft:stone -> minecraft )
     if mod_name ~= "minecraft" then
-        face_barrel()
+        face_first_chest()
         turtle.turnLeft()
         turtle.drop()
         return true
     else
-        face_barrel()
-        turtle.turnLeft()
-        turtle.turnLeft()
+        face_first_chest()
         turtle.drop()
     end
 end
@@ -84,6 +84,6 @@ end
  
 while true do
     auto_sort()
-    face_barrel()
+    face_first_chest()
     sleep(30)
 end
