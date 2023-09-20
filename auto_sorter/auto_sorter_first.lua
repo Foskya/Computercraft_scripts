@@ -32,34 +32,27 @@ ores_array = {
     "minecraft:gold_nugget"
 }
 
-foods_array = {
-    "minecraft:pumpkin",
-    "minecraft:wheat",
-    "minecraft:hay_block",
-    "minecraft:melon"
-}
-
-
 ores_tag_array = {
-    "c:raw_materials", 
-    "c:ingots", 
-    "c:gems", 
-    "c:dusts", 
+    "c:raw_materials",
+    "forge:raw_materials",
+    "c:ingots",
+    "forge:ingots",
+    "c:gems",
+    "forge:gems", 
+    "c:dusts",
+    "forge:dusts",
     "c:nuggets",
-    "c:storage_blocks"
+    "forge:nuggets",
+    "c:storage_blocks",
+    "forge:storage_blocks"
 }
 
 equipment_tag_array = {
-    "c:tools", 
-    "c:armors", 
-    "minecraft:arrows", 
-    "c:potions"
+    "c:potions",
+    "forge:potions",
+    "minecraft:arrows"    
 }
 
-food_tag_array = {
-    "c:foods",
-    "c:seeds",
-}
 
 wood_tag_array = {
     "minecraft:planks",
@@ -86,27 +79,20 @@ function item_has_tag(item_tags_array, chosen_tag_array)
     end
 end
  
-function face_barrel()
+function face_first_chest()
     local _block_is_found , block_data_table = turtle.inspect()
-    while block_data_table.name ~= "minecraft:barrel" do
+    while block_data_table.name ~= "minecraft:ender_chest" do
         turtle.turnLeft()
         _block_is_found , block_data_table = turtle.inspect()
     end
 end
 
 
--- FILTERING --
-function item_is_food(item_data_table)
-    if item_has_tag(item_data_table.tags, food_tag_array) or object_is_in_array(item_data_table.name, foods_array) then
-        face_barrel()
-        turtle.drop()
-        return true
-    end
-end
 
+-- FILTERING --
 function item_is_ore(item_data_table)
     if object_is_in_array(item_data_table.name, ores_array) or item_has_tag(item_data_table.tags, ores_tag_array) then
-        face_barrel()
+        face_first_chest()
         turtle.turnLeft()
         turtle.drop()
         return true
@@ -114,8 +100,8 @@ function item_is_ore(item_data_table)
 end
 
 function item_is_equipment(item_data_table)
-    if item_has_tag(item_data_table.tags, equipment_tag_array) then
-        face_barrel()
+    if item_has_tag(item_data_table.tags, equipment_tag_array) or item_data_table.enchantments or item_data_table.damage then
+        face_first_chest()
         turtle.turnLeft()
         turtle.turnLeft()
         turtle.drop()
@@ -126,7 +112,7 @@ end
 function item_is_wood(item_data_table)
     local is_fuel, _string_if_false = turtle.refuel(0) -- it "burns" 0 items
     if is_fuel or item_has_tag(item_data_table.tags, wood_tag_array) then
-        face_barrel()
+        face_first_chest()
         turtle.turnRight()
         turtle.drop()
 		return true
@@ -140,8 +126,6 @@ function auto_sort()
         local item_data_table = turtle.getItemDetail(slot, true)
         if item_data_table == nil then
             -- do nothing
-        elseif item_is_food(item_data_table) then
-            print(item_data_table.name .. " in foods")
         elseif item_is_ore(item_data_table) then
             print(item_data_table.name .. " in ores")
         elseif item_is_equipment(item_data_table) then
@@ -157,6 +141,6 @@ end
 
 while true do
     auto_sort()
-    face_barrel()
+    face_first_chest()
     sleep(30)
 end
